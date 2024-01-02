@@ -11,7 +11,7 @@ const signUp = (req, res) => {
             });
         } else {
             bcryptjs.genSalt(10, (err, salt) => {
-                bcryptjs.hash(req.body.password, salt, (err, hash) => {
+                bcryptjs.hash(req.body.Password, salt, (err, hash) => {
                     const user = {
                         firstName: req.body.firstName,
                         lastName : req.body.lastName,
@@ -23,8 +23,8 @@ const signUp = (req, res) => {
                         firstName: { type: "string", optional: false, max: 100 },
                         lastName: { type: "string", optional: false, max: 100 },
                         email: { type: "email", optional: false },
-                        MobileNo: { type: "number", optional: false ,max: 10},
-                        Password: { type: "string", optional: false ,min: 8},
+                        MobileNo: { type: "number", optional: false},
+                        Password: { type: "string", optional: false},
                     };
                     const v = new Validator();
                     const validationResponse = v.validate(user, schema);
@@ -60,7 +60,7 @@ const login = (req, res) => {
                 message: "Invalid Credentials"
             });
         } else {
-            bcryptjs.compare(req.body.password, user.Password, (err, result) => {
+            bcryptjs.compare(req.body.Password, user.Password, (err, result) => {
                 if (result) {
                     const token = jwt.sign({
                         email: user.email,
