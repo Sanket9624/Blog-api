@@ -35,10 +35,10 @@ const signUp = (req, res) => {
                         });
                     }
                     models.User.create(user).then(result => {
-                        console.log("This is result" + result);
-                        res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:5500'); // Set your frontend URL here
-                        res.header('Access-Control-Allow-Methods', 'POST');
-                        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+                        // console.log("This is result" + result);
+                        // res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:5500'); // Set your frontend URL here
+                        // res.header('Access-Control-Allow-Methods', 'POST');
+                        // res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
                         res.status(201).json({
                             message: "User Created Successfully"
                         });

@@ -1,7 +1,7 @@
 const Validator = require('fastest-validator')
 const models = require("../models")
 
-function save(req,res){
+const save = (req,res) => {
             const post = {
                         title:req.body.title,
                         content:req.body.content,
@@ -33,7 +33,7 @@ function save(req,res){
             })
 }
 
-function showById(req,res){
+const showById = (req,res) => {
             const id = req.params.id
             
             models.Post.findByPk(id).then(result=>{
@@ -53,7 +53,7 @@ function showById(req,res){
             })
 }
 
-function showAll(req,res){
+const showAll = (req,res) => {
             const id = req.params.id
 
             models.Post.findAll(id).then(result =>{
@@ -66,7 +66,7 @@ function showAll(req,res){
             })
 }
 
-function update(req,res){
+const update = (req,res) => {
             const id = req.params.id
 
             const updatePost = {
@@ -97,7 +97,7 @@ function update(req,res){
                                     })
             }) 
 }
-function destroy(req,res){
+const destroy = (req,res) => {
             const id = req.params.id
            
             models.Post.destroy({where : {id : id}}).then(result=>{

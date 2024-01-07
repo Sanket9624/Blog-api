@@ -14,5 +14,5 @@ app.use('/uploads',express.static('upload'))
 app.use('/post',postRoute)
 app.use('/user',userRoute)
 app.use('/images',imageRoute)
-app.use('/api', commentRoutes); 
+app.use('/api', commentRoutes) 
 module.exports = app

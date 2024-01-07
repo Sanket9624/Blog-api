@@ -1,7 +1,7 @@
 const { Comment } = require('../models');
 const Validator = require('fastest-validator');
 
-function createComment(req, res) {
+const createComment = (req, res) => {
   const { postId, text } = req.body;
 
   const schema = {
@@ -29,7 +29,7 @@ function createComment(req, res) {
     });
 }
 
-function getCommentsForPost(req, res) {
+const getCommentsForPost = (req, res) => {
   const { postId } = req.params;
 
   const schema = {
@@ -56,7 +56,7 @@ function getCommentsForPost(req, res) {
     });
 }
 
-function updateComment(req, res) {
+const updateComment = (req, res) => {
   const { id } = req.params;
   const { text } = req.body;
 
@@ -88,7 +88,7 @@ function updateComment(req, res) {
     });
 }
 
-function deleteComment(req, res) {
+const deleteComment = (req, res) => {
   const { id } = req.params;
 
   const schema = {
