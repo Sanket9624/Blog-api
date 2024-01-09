@@ -19,9 +19,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       MobileNo: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER
       },
       Password: {
+        type: Sequelize.STRING
+      },
+      resetToken: {
         type: Sequelize.STRING
       },
       createdAt: {

@@ -1,7 +1,10 @@
 const express = require('express')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const app = express()
-            
+
+app.use(cors());
+
 const postRoute = require("./Routes/post")
 const userRoute = require("./Routes/user")
 const imageRoute = require("./Routes/image")
@@ -15,4 +18,9 @@ app.use('/post',postRoute)
 app.use('/user',userRoute)
 app.use('/images',imageRoute)
 app.use('/api', commentRoutes) 
-module.exports = app
+
+
+const port = 3000
+app.listen(port,()=>{
+            console.log(`Port is running on http://localhost:${port}`);
+})

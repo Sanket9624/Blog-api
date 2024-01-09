@@ -13,11 +13,13 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.18.2",
     "fastest-validator": "^1.17.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.6.5",
+    "nodemailer": "^6.9.8",
     "nodemon": "^3.0.2",
     "sequelize": "^6.35.1",
     "sequelize-cli": "^6.6.2"
