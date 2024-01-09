@@ -21,10 +21,4 @@ router.delete('/:id', checkAuthMiddleware.checkAuth ,userController.deleteUser);
 // Change user password
 router.put('/change-password/:id', checkAuthMiddleware.checkAuth ,userController.changePassword);
 
-// // Forgot password - Generate reset token
-// router.post('/forgot-password',userController.generateResetToken);
-
-// // Reset password using reset token
-// router.put('/reset-password',userController.resetPassword);
-
 module.exports = router;
