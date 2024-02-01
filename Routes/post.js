@@ -6,9 +6,11 @@ const router = express.Router();
 
 router.post("/",checkAuthMiddleware.checkAuth,postController.save)
 
+router.get("/userId",checkAuthMiddleware.checkAuth,postController.showByUserId)
+
 router.get("/:id",checkAuthMiddleware.checkAuth,postController.showById)
 
-router.get("/",checkAuthMiddleware.checkAuth,postController.showAll)
+router.get("/",postController.showAll)
 
 router.put("/:id",checkAuthMiddleware.checkAuth,postController.update)
 

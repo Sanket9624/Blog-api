@@ -6,6 +6,7 @@ const save = (req,res) => {
                         title:req.body.title,
                         content:req.body.content,
                         imageUrl:req.body.imageUrl,
+                        userId :req.userData.userId
             }
             const schema = {
                         title:{type:"string", optional:false, max:"100"},
@@ -33,6 +34,31 @@ const save = (req,res) => {
             })
 }
 
+const showByUserId = (req,res) => {
+
+   const userId = req.userData.userId
+   
+   models.Post.findAll({
+      where :{
+      userId : userId,
+      },
+   })
+      .then(result=>{
+               if(result){
+                           res.status(200).json(result)
+               }else{
+                           res.status(404).json({
+                                       message:"Post not found"
+                           })
+               }
+   })
+   .catch(err=>{
+               res.status(500).json({
+                           message:"Something went wrong",
+                           err:err
+                           })
+   })
+}
 const showById = (req,res) => {
             const id = req.params.id
             
@@ -115,6 +141,7 @@ const destroy = (req,res) => {
 module.exports = {
             save : save,
             showById : showById,
+            showByUserId : showByUserId,
             showAll : showAll,
             update : update,
             destroy : destroy
