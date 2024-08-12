@@ -11,7 +11,7 @@ router.post("/login",userController.loginUser);
 
 // Get user by ID
 router.get('/:id',checkAuthMiddleware.checkAuth,userController.getUserById);
-
+            
 // Update user details
 router.put('/:id', checkAuthMiddleware.checkAuth ,userController.updateUser);
 

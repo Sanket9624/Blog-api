@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 const models = require("../models");
 const bcryptjs = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");  
 const Validator = require('fastest-validator');
 
 //For Create a New User
@@ -9,10 +9,10 @@ const signUpUser = async (req, res) => {
     try {
         const existingUser = await models.User.findOne({ where: { email: req.body.email } });
 
-        if (existingUser) {
+        if (existingUser) { 
             return res.status(409).json({
                 message: "User Already Exists"
-            });
+            }); 
         }
 
         const salt = await bcryptjs.genSalt(10);

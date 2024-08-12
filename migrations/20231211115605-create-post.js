@@ -25,7 +25,7 @@ module.exports = {
       },
       categoryId: {
         type: Sequelize.INTEGER,
-        autoIncrement:true
+        // autoIncrement:true
       },
       createdAt: {
         allowNull: false,
