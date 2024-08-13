@@ -7,7 +7,7 @@ const Validator = require('fastest-validator');
 //For Create a New User
 const signUpUser = async (req, res) => {
     try {
-        const existingUser = await models.User.findOne({ where: { email: req.body.email } });
+        const existingUser = await models.Auth.findOne({ where: { email: req.body.email } });
 
         if (existingUser) { 
             return res.status(409).json({
@@ -16,22 +16,22 @@ const signUpUser = async (req, res) => {
         }
 
         const salt = await bcryptjs.genSalt(10);
-        const hashedPassword = await bcryptjs.hash(req.body.Password, salt);
+        const hashedPassword = await bcryptjs.hash(req.body.password, salt);
 
         const user = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
             email: req.body.email,
             MobileNo: req.body.MobileNo,
-            Password: hashedPassword,
+            password: hashedPassword,
         };
 
         const schema = {
-            firstName: { type: "string", optional: false, max: 100 },
-            lastName: { type: "string", optional: false, max: 100 },
+            first_name: { type: "string", optional: false, max: 100 },
+            last_name: { type: "string", optional: false, max: 100 },
             email: { type: "email", optional: false },
             MobileNo: { type: "string", optional: false },
-            Password: { type: "string", optional: false },
+            password: { type: "string", optional: false },
         };
 
         const v = new Validator();
@@ -44,7 +44,7 @@ const signUpUser = async (req, res) => {
             });
         }
 
-        const createdUser = await models.User.create(user);
+        const createdUser = await models.Auth.create(user);
 
         res.status(201).json({
             message: "User Created Successfully",
@@ -61,7 +61,7 @@ const signUpUser = async (req, res) => {
 //TO login  User
 const loginUser = async (req, res) => {
     try {
-        const user = await models.User.findOne({ where: { email: req.body.email } });
+        const user = await models.Auth.findOne({ where: { email: req.body.email } });
 
         if (!user) {
             return res.status(409).json({
@@ -69,7 +69,7 @@ const loginUser = async (req, res) => {
             });
         }
 
-        bcryptjs.compare(req.body.Password, user.Password, (err, result) => {
+        bcryptjs.compare(req.body.password, user.password, (err, result) => {
             if (result) {
                 const token = jwt.sign({
                     email: user.email,
@@ -97,7 +97,7 @@ const loginUser = async (req, res) => {
 const getUserById = async (req, res) => {
     try {
         const userId = req.params.id;
-        const user = await models.User.findByPk(userId);
+        const user = await models.Auth.findByPk(userId);
 
         if (!user) {
             return res.status(404).json({
@@ -120,13 +120,13 @@ const updateUser = async (req, res) => {
     try {
         const userId = req.params.id;
         const updatedData = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
             email: req.body.email,
             MobileNo: req.body.MobileNo,
         };
 
-        const user = await models.User.findByPk(userId);
+        const user = await models.Auth.findByPk(userId);
 
         if (!user) {
             return res.status(404).json({
@@ -150,7 +150,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const userId = req.params.id;
-        const user = await models.User.findByPk(userId);
+        const user = await models.Auth.findByPk(userId);
 
         if (!user) {
             return res.status(404).json({
@@ -173,7 +173,7 @@ const deleteUser = async (req, res) => {
 const changePassword = async (req, res) => {
     try {
         const userId = req.params.id;
-        const { Password, newPassword, confirmPassword } = req.body;
+        const { password, newPassword, confirmPassword } = req.body;
 
         if (newPassword !== confirmPassword) {
             return res.status(400).json({
@@ -181,7 +181,7 @@ const changePassword = async (req, res) => {
             });
         }
 
-        const user = await models.User.findByPk(userId);
+        const user = await models.Auth.findByPk(userId);
 
         if (!user) {
             return res.status(404).json({

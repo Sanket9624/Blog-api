@@ -20,7 +20,7 @@ app.use('/images',imageRoute)
 app.use('/api', commentRoutes) 
 
 
-const port = 3306
+const port = process.env.PORT
 app.listen(port,()=>{
             console.log(`Port is running on http://localhost:${port}`);
 })
